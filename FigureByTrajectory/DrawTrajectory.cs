@@ -10,9 +10,9 @@ namespace FigureByTrajectory
     internal class DrawTrajectory
     {
         private Graphics graphics;
-        public Color trajectoryColor;
         private float xc;
         private float yc;
+        public Color trajectoryColor;
         public int diameter;
 
         public DrawTrajectory(Graphics graphics, Color trajectoryColor, float xc, float yc, int diameter) 

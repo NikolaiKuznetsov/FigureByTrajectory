@@ -18,6 +18,8 @@ namespace FigureByTrajectory
         Graphics graphics;
         DrawTrajectory trajectory;
         DrawFigure figure;
+        double speed = 0.1;
+        double breathingRate = 0.1;
 
         public Form1()
         {
@@ -26,6 +28,7 @@ namespace FigureByTrajectory
             trajectory = new DrawTrajectory(graphics, trajectoryColor, pictureBox1.Width / 2, pictureBox1.Height / 2, trajectorySize.Value);
             figure = new DrawFigure(graphics, figureColor, pictureBox1.Width / 2, pictureBox1.Height / 2, figureSize.Value, trajectorySize.Value);
             itemsDraw();
+            DoubleBuffered = true;
         }
 
         private void itemsDraw()
@@ -67,7 +70,7 @@ namespace FigureByTrajectory
 
         private void trajectorySize_ValueChanged(object sender, EventArgs e)
         {
-            trajectory.diameter = trajectorySize.Value;
+            figure.diameter = trajectory.diameter = trajectorySize.Value;
             itemsDraw();
         }
 
@@ -77,15 +80,26 @@ namespace FigureByTrajectory
             itemsDraw();
         }
 
-        private void buttonStart_Click(object sender, EventArgs e)
+        private void figureSpeed_ValueChanged(object sender, EventArgs e)
         {
-            timer1.Enabled = true;
+            speed = (double)figureSpeed.Value / 10;
+        }
+
+        private void figureBreathingRate_ValueChanged(object sender, EventArgs e)
+        {
+            breathingRate = (double)figureBreathingRate.Value / 10;
+        }
+
+        private void timerFigureSpeed_Tick(object sender, EventArgs e)
+        {
+            figure.speed += speed;
             itemsDraw();
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void timerFigureBreathingRate_Tick(object sender, EventArgs e)
         {
-            
+            figure.breathingRate += breathingRate;
+            itemsDraw();
         }
     }
 }
