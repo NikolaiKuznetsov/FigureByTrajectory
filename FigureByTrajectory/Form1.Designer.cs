@@ -45,7 +45,6 @@
             figureBreathingRate = new TrackBar();
             colorFigure = new ColorDialog();
             timerFigureSpeed = new System.Windows.Forms.Timer(components);
-            timerFigureBreathingRate = new System.Windows.Forms.Timer(components);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)trajectorySize).BeginInit();
             ((System.ComponentModel.ISupportInitialize)figureSize).BeginInit();
@@ -61,6 +60,7 @@
             pictureBox1.Size = new Size(463, 588);
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
+            pictureBox1.Paint += pictureBox1_Paint;
             // 
             // trajectorySize
             // 
@@ -110,14 +110,13 @@
             // 
             figureSize.LargeChange = 1;
             figureSize.Location = new Point(469, 190);
-            figureSize.Maximum = 200;
+            figureSize.Maximum = 100;
             figureSize.Minimum = 10;
             figureSize.Name = "figureSize";
             figureSize.Size = new Size(198, 48);
             figureSize.TabIndex = 5;
             figureSize.TabStop = false;
             figureSize.Value = 10;
-            figureSize.ValueChanged += figureSize_ValueChanged;
             // 
             // label2
             // 
@@ -150,7 +149,6 @@
             figureSpeed.Size = new Size(198, 48);
             figureSpeed.TabIndex = 8;
             figureSpeed.Value = 1;
-            figureSpeed.ValueChanged += figureSpeed_ValueChanged;
             // 
             // label3
             // 
@@ -176,25 +174,19 @@
             // 
             figureBreathingRate.LargeChange = 1;
             figureBreathingRate.Location = new Point(469, 383);
+            figureBreathingRate.Maximum = 9;
             figureBreathingRate.Minimum = 1;
             figureBreathingRate.Name = "figureBreathingRate";
-            figureBreathingRate.RightToLeft = RightToLeft.No;
+            figureBreathingRate.RightToLeft = RightToLeft.Yes;
             figureBreathingRate.Size = new Size(198, 48);
             figureBreathingRate.TabIndex = 11;
-            figureBreathingRate.Value = 1;
-            figureBreathingRate.ValueChanged += figureBreathingRate_ValueChanged;
+            figureBreathingRate.Value = 9;
             // 
             // timerFigureSpeed
             // 
             timerFigureSpeed.Enabled = true;
             timerFigureSpeed.Interval = 40;
             timerFigureSpeed.Tick += timerFigureSpeed_Tick;
-            // 
-            // timerFigureBreathingRate
-            // 
-            timerFigureBreathingRate.Enabled = true;
-            timerFigureBreathingRate.Interval = 40;
-            timerFigureBreathingRate.Tick += timerFigureBreathingRate_Tick;
             // 
             // Form1
             // 
@@ -217,6 +209,8 @@
             MaximizeBox = false;
             Name = "Form1";
             Text = "Form1";
+            FormClosing += Form1_FormClosing;
+            Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)trajectorySize).EndInit();
             ((System.ComponentModel.ISupportInitialize)figureSize).EndInit();
@@ -243,6 +237,5 @@
         private TrackBar figureBreathingRate;
         private ColorDialog colorFigure;
         private System.Windows.Forms.Timer timerFigureSpeed;
-        private System.Windows.Forms.Timer timerFigureBreathingRate;
     }
 }
